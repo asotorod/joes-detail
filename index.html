@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jersey Joe Mobile Detailing | Marshalls Creek, PA | Professional Auto Detailing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00b4d8;
+            --primary-dark: #0096c7;
+            --secondary: #1b2a4e;
+            --accent: #ff6b35;
+            --accent-hover: #ff5722;
+            --dark: #0d1b2a;
+            --light: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-dark: #343a40;
+            --text: #4a4a4a;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--secondary);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .top-bar a {
+            color: var(--light);
+            margin-right: 20px;
+        }
+
+        .top-bar a:hover {
+            color: var(--primary);
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .book-online-btn {
+            background: var(--accent);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .book-online-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--light);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Slider */
+        .hero {
+            position: relative;
+            height: 700px;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: relative;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.85) 0%, rgba(27, 42, 78, 0.7) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text {
+            color: white;
+        }
+
+        .hero-subtitle {
+            color: var(--primary);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .hero-service-tag {
+            background: rgba(0, 180, 216, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .hero-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Quote Form */
+        .quote-form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quote-form-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .quote-form-title p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .quote-form-title h3 {
+            color: var(--secondary);
+            font-size: 24px;
+        }
+
+        .quote-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .quote-form select,
+        .quote-form input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .quote-form select:focus,
+        .quote-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .quote-form-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .quote-form-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.4);
+        }
+
+        .quote-form-phone {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .quote-form-phone p {
+            color: var(--gray);
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .quote-form-phone a {
+            color: var(--secondary);
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .quote-form-phone a:hover {
+            color: var(--primary);
+        }
+
+        .quote-form-phone span {
+            display: block;
+            color: var(--gray);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* Slider Navigation */
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--accent);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .about-badge-number {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .about-badge-text {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-label {
+            color: var(--primary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 42px;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .about-text p {
+            color: var(--text);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .about-feature::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .why-us-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: var(--gray-light);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .why-us-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            background: white;
+        }
+
+        .why-us-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 36px;
+        }
+
+        .why-us-card h3 {
+            color: var(--secondary);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .why-us-card p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+
+        /* Stats */
+        .stats {
+            background: var(--secondary);
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+
+        /* Service Tabs */
+        .service-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .service-tab {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+        }
+
+        .service-tab:hover,
+        .service-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .service-notice {
+            text-align: center;
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        .service-notice strong {
+            color: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .service-price-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-prices {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .service-price {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--gray-light);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .service-price-label {
+            font-size: 11px;
+            color: var(--gray);
+            text-transform: uppercase;
+        }
+
+        .service-price-amount {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .service-card h3 {
+            color: var(--secondary);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .service-link:hover {
+            color: var(--accent);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .testimonials-slider {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        .testimonial-quote {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 80px;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .testimonial-info h4 {
+            color: var(--secondary);
+            font-size: 18px;
+        }
+
+        .testimonial-info span {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .cta-btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .cta-btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+        }
+
+        .cta-btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .faq-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-light);
+        }
+
+        .faq-question h4 {
+            color: var(--secondary);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 30px 25px;
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 28px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 180, 216, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--secondary);
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .contact-text span,
+        .contact-text a {
+            color: var(--gray);
+            font-size: 15px;
+        }
+
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+
+        .contact-form {
+            background: var(--gray-light);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .contact-form h3 {
+            color: var(--secondary);
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .contact-form-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.4);
+        }
+
+        /* Service Area / Location */
+        .location {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .location-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .location-content {
+            padding: 35px;
+            text-align: center;
+        }
+
+        .location-content h3 {
+            color: var(--secondary);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .location-details {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .location-details li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .location-details li span {
+            font-size: 18px;
+        }
+
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .location-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-about .logo-text {
+            color: white;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .footer-contact li span {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        /* Discount Popup */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-overlay.active {
+            display: flex;
+        }
+
+        .popup {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: popupIn 0.4s ease;
+        }
+
+        @keyframes popupIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: var(--gray-light);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .popup-badge {
+            background: var(--accent);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .popup h3 {
+            color: var(--secondary);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .popup-discount {
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .popup p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .popup-form input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .popup-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .quote-form-card {
+                max-width: 450px;
+                margin: 0 auto;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero {
+                height: auto;
+                padding: 100px 0 60px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-us-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <a href="tel:+15705551234">📞 (570) 555-1234</a>
+                    <a href="mailto:info@jerseyjoedetailing.com">✉️ info@jerseyjoedetailing.com</a>
+                </div>
+                <div class="top-bar-right">
+                    <a href="#contact" class="book-online-btn">Book Online (Mobile Service)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">JJ</div>
+                    <div class="logo-text">Jersey <span>Joe</span></div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services & Prices</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <!-- Slide 1 -->
+            <div class="hero-slide active">
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=1920&q=80')"></div>
+                <div class="hero-content container">
+                    <div class="hero-grid">
+                        <div class="hero-text">
+                            <p class="hero-subtitle">Welcome to Jersey Joe Mobile Detailing</p>
+                            <h1 class="hero-title">Your car is always<br><span>in great hands</span> with us</h1>
+                            <div class="hero-services">
+                                <span class="hero-service-tag">Full Detailing</span>
+                                <span class="hero-service-tag">Ceramic Coatings</span>
+                                <span class="hero-service-tag">Interior Detail</span>
+                                <span class="hero-service-tag">Express Wash</span>
+                            </div>
+                            <a href="#services" class="hero-cta">View All Services →</a>
+                        </div>
+                        <div class="quote-form-card">
+                            <div class="quote-form-title">
+                                <p>Looking for professional detailing?</p>
+                                <h3>Get a FREE Quote Now!</h3>
+                            </div>
+                            <form class="quote-form" onsubmit="handleQuoteForm(event)">
+                                <div class="form-group">
+                                    <select>
+                                        <option>Select Vehicle Type</option>
+                                        <option>Sedan / Coupe</option>
+                                        <option>SUV / Crossover</option>
+                                        <option>Truck</option>
+                                        <option>Van / Minivan</option>
+                                        <option>Sports Car</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select>
+                                        <option>Select Service Package</option>
+                                        <option>Express Wash - Starting $75</option>
+                                        <option>Interior Detail - Starting $125</option>
+                                        <option>Complete Detail - Starting $175</option>
+                                        <option>Ceramic Coating - Starting $300</option>
+                                        <option>Custom Service</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Your Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" placeholder="Phone Number">
+                                </div>
+                                <button type="submit" class="quote-form-btn">Get a Quote</button>
+                            </form>
+                            <div class="quote-form-phone">
+                                <p>Or call us directly</p>
+                                <a href="tel:+15705551234">(570) 555-1234</a>
+                                <span>Monday - Saturday 8am - 6pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1920&q=80')"></div>
+                <div class="hero-content container">
+                    <div class="hero-grid">
+                        <div class="hero-text">
+                            <p class="hero-subtitle">From Express Detail to Full Inside & Out</p>
+                            <h1 class="hero-title">Detailing service<br><span>with a personal</span> touch</h1>
+                            <div class="hero-services">
+                                <span class="hero-service-tag">We Come To You</span>
+                                <span class="hero-service-tag">Premium Products</span>
+                                <span class="hero-service-tag">13+ Years Experience</span>
+                            </div>
+                            <a href="#contact" class="hero-cta">Request a Free Quote →</a>
+                        </div>
+                        <div class="quote-form-card">
+                            <div class="quote-form-title">
+                                <p>Looking for professional detailing?</p>
+                                <h3>Get a FREE Quote Now!</h3>
+                            </div>
+                            <form class="quote-form" onsubmit="handleQuoteForm(event)">
+                                <div class="form-group">
+                                    <select>
+                                        <option>Select Vehicle Type</option>
+                                        <option>Sedan / Coupe</option>
+                                        <option>SUV / Crossover</option>
+                                        <option>Truck</option>
+                                        <option>Van / Minivan</option>
+                                        <option>Sports Car</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select>
+                                        <option>Select Service Package</option>
+                                        <option>Express Wash - Starting $75</option>
+                                        <option>Interior Detail - Starting $125</option>
+                                        <option>Complete Detail - Starting $175</option>
+                                        <option>Ceramic Coating - Starting $300</option>
+                                        <option>Custom Service</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Your Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" placeholder="Phone Number">
+                                </div>
+                                <button type="submit" class="quote-form-btn">Get a Quote</button>
+                            </form>
+                            <div class="quote-form-phone">
+                                <p>Or call us directly</p>
+                                <a href="tel:+15705551234">(570) 555-1234</a>
+                                <span>Monday - Saturday 8am - 6pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <div class="slider-dot active" onclick="goToSlide(0)"></div>
+            <div class="slider-dot" onclick="goToSlide(1)"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80" alt="Professional detailing">
+                    <div class="about-badge">
+                        <div class="about-badge-number">13+</div>
+                        <div class="about-badge-text">Years Experience</div>
+                    </div>
+                </div>
+                <div class="about-text fade-in">
+                    <span class="section-label">Who We Are & What We Do</span>
+                    <h2 class="section-title">Get to Know Us Better</h2>
+                    <p>At Jersey Joe Mobile Detailing, we truly care about the job we do and our top priority is to provide our customers the best service possible!</p>
+                    <p>With over 13 years of experience in the car wash and automotive detailing industry, our mission is to save you time by bringing professional detailing directly to your location. We offer an experience and level of detail that you and your car won't forget.</p>
+                    <p>Our friendly and professionally trained staff use only the highest quality products to ensure your vehicle looks its absolute best. We service all of Marshalls Creek, the Pocono region, and surrounding areas including Saylorsburg, East Stroudsburg, and Stroudsburg.</p>
+                    <div class="about-features">
+                        <div class="about-feature">Over 13 Years Experience</div>
+                        <div class="about-feature">100% Mobile Service</div>
+                        <div class="about-feature">Premium Products Only</div>
+                        <div class="about-feature">Satisfaction Guaranteed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <div class="container">
+            <div class="why-us-grid">
+                <div class="why-us-card fade-in">
+                    <div class="why-us-icon">🚐</div>
+                    <h3>100% Mobile Service</h3>
+                    <p>We come directly to your home, office, or any location that's convenient for you. No need to waste time at a car wash!</p>
+                </div>
+                <div class="why-us-card fade-in">
+                    <div class="why-us-icon">🌼</div>
+                    <h3>Premium Products</h3>
+                    <p>We use only professional-grade detailing products and proven techniques to ensure the best results every time.</p>
+                </div>
+                <div class="why-us-card fade-in">
+                    <div class="why-us-icon">⭐</div>
+                    <h3>Trusted & Reliable</h3>
+                    <p>Years of experience and thousands of satisfied customers. Our promise is simple: We're not happy until you are!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Mobile Service</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Vehicles Detailed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">13+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5☆</div>
+                    <div class="stat-label">Customer Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">What We Offer</span>
+                <h2 class="section-title">Our Services & Prices</h2>
+                <p>Vehicles are categorized by size and difficulty in detailing. All services performed at your location!</p>
+            </div>
+
+            <div class="service-tabs">
+                <button class="service-tab active" onclick="switchServiceTab('cars')">Cars / SUVs / Trucks</button>
+            </div>
+
+            <div class="service-notice">
+                <strong>📍 Mobile Services:</strong> All prices include travel to your location in the Pocono region. Additional charges may apply for locations outside our standard service area.
+            </div>
+
+            <div class="services-grid" id="cars-services">
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&q=80')">
+                        <div class="service-price-badge">From $75</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-prices">
+                            <div class="service-price">
+                                <span class="service-price-label">Car</span>
+                                <span class="service-price-amount">$75</span>
+                            </div>
+                            <div class="service-price">
+                                <span class="service-price-label">SUV/Truck</span>
+                                <span class="service-price-amount">$95</span>
+                            </div>
+                        </div>
+                        <h3>Express Wash Package</h3>
+                        <p>Quick but thorough exterior hand wash with professional-grade products. Perfect for regular maintenance.</p>
+                        <ul class="service-features">
+                            <li>Full Exterior Hand Wash</li>
+                            <li>Wheel & Tire Cleaning</li>
+                            <li>Windows Inside & Out</li>
+                            <li>Quick Interior Vacuum</li>
+                            <li>Dashboard Wipe Down</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80')">
+                        <div class="service-price-badge">Most Popular</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-prices">
+                            <div class="service-price">
+                                <span class="service-price-label">Car</span>
+                                <span class="service-price-amount">$175</span>
+                            </div>
+                            <div class="service-price">
+                                <span class="service-price-label">SUV/Truck</span>
+                                <span class="service-price-amount">$225</span>
+                            </div>
+                        </div>
+                        <h3>Complete Detail Package</h3>
+                        <p>The ultimate package for your vehicle. Comprehensive interior and exterior detail to make your car shine like new.</p>
+                        <ul class="service-features">
+                            <li>Everything in Express Wash</li>
+                            <li>Full Interior Deep Clean</li>
+                            <li>Leather Conditioning</li>
+                            <li>Hand Wax & Polish</li>
+                            <li>Engine Bay Cleaning</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80')">
+                        <div class="service-price-badge">From $125</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-prices">
+                            <div class="service-price">
+                                <span class="service-price-label">Car</span>
+                                <span class="service-price-amount">$125</span>
+                            </div>
+                            <div class="service-price">
+                                <span class="service-price-label">SUV/Truck</span>
+                                <span class="service-price-amount">$150</span>
+                            </div>
+                        </div>
+                        <h3>Interior Detail Package</h3>
+                        <p>Deep cleaning of all interior surfaces. Steam cleaning, shampooing, and complete sanitization.</p>
+                        <ul class="service-features">
+                            <li>Complete Vacuum & Steam Clean</li>
+                            <li>Carpet & Seat Shampoo</li>
+                            <li>Dashboard & Trim Detail</li>
+                            <li>Cup Holders & Vents</li>
+                            <li>Odor Elimination</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80')">
+                        <div class="service-price-badge">From $100</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-prices">
+                            <div class="service-price">
+                                <span class="service-price-label">Car</span>
+                                <span class="service-price-amount">$100</span>
+                            </div>
+                            <div class="service-price">
+                                <span class="service-price-label">SUV/Truck</span>
+                                <span class="service-price-amount">$125</span>
+                            </div>
+                        </div>
+                        <h3>Wax & Polish Package</h3>
+                        <p>Professional hand wax application to protect and enhance your vehicle's paint finish.</p>
+                        <ul class="service-features">
+                            <li>Includes Express Wash</li>
+                            <li>Clay Bar Treatment</li>
+                            <li>Hand Polish</li>
+                            <li>Premium Wax Application</li>
+                            <li>Tire Shine</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80')">
+                        <div class="service-price-badge">Premium</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-prices">
+                            <div class="service-price">
+                                <span class="service-price-label">Car</span>
+                                <span class="service-price-amount">$300</span>
+                            </div>
+                            <div class="service-price">
+                                <span class="service-price-label">SUV/Truck</span>
+                                <span class="service-price-amount">$400</span>
+                            </div>
+                        </div>
+                        <h3>Ceramic Coating</h3>
+                        <p>Long-lasting paint protection that keeps your vehicle looking showroom fresh for years.</p>
+                        <ul class="service-features">
+                            <li>Paint Decontamination</li>
+                            <li>Clay Bar Treatment</li>
+                            <li>Paint Correction</li>
+                            <li>Ceramic Coating Application</li>
+                            <li>2+ Year Protection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&q=80')">
+                        <div class="service-price-badge">Add-On</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-prices">
+                            <div class="service-price">
+                                <span class="service-price-label">Starting</span>
+                                <span class="service-price-amount">$75</span>
+                            </div>
+                        </div>
+                        <h3>Additional Services</h3>
+                        <p>Extra services to complement your detail package.</p>
+                        <ul class="service-features">
+                            <li>Headlight Restoration - $75</li>
+                            <li>Engine Detail - $50</li>
+                            <li>Pet Hair Removal - $50</li>
+                            <li>Scratch Removal - Quote</li>
+                            <li>Paint Touch-Up - Quote</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Customer Testimonials</span>
+                <h2 class="section-title">What People Are Saying</h2>
+                <p>Don't just take our word for it — hear from our satisfied customers in the Pocono region!</p>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonial-slide active">
+                    <div class="testimonial-stars">☆☆☆☆☆</div>
+                    <p class="testimonial-quote">Joe did an incredible job on my truck! It looks better than when I bought it. The attention to detail is amazing and he's so professional. The convenience of having him come to my house is unbeatable. Highly recommend to everyone!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-info">
+                            <h4>Mike R.</h4>
+                            <span>Saylorsburg, PA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-slide">
+                    <div class="testimonial-stars">☆☆☆☆☆</div>
+                    <p class="testimonial-quote">Best mobile detailing service in the Poconos! My car had never been so clean. Joe really takes pride in his work and it shows. Will definitely be using his services again. Worth every penny!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-info">
+                            <h4>Sarah T.</h4>
+                            <span>Marshalls Creek, PA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-slide">
+                    <div class="testimonial-stars">☆☆☆☆☆</div>
+                    <p class="testimonial-quote">Professional service from start to finish. My SUV interior was a mess with kids' stuff everywhere — now it's spotless! Joe was on time, friendly, and did exactly what he promised. Great job!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">D</div>
+                        <div class="testimonial-info">
+                            <h4>Dave K.</h4>
+                            <span>East Stroudsburg, PA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <div class="testimonial-dot active" onclick="goToTestimonial(0)"></div>
+                    <div class="testimonial-dot" onclick="goToTestimonial(1)"></div>
+                    <div class="testimonial-dot" onclick="goToTestimonial(2)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Get Your Vehicle Detailed?</h2>
+            <p>Call us now or request a quote online. We come to you!</p>
+            <div class="cta-buttons">
+                <a href="tel:+15705551234" class="cta-btn cta-btn-primary">📞 Call (570) 555-1234</a>
+                <a href="#contact" class="cta-btn cta-btn-outline">Request a Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Have Questions?</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>How does mobile detailing work?</h4>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            It's simple! You book an appointment, and we come to your location — whether it's your home, office, or anywhere else convenient for you. We bring all our own equipment, water, and supplies. All we need is access to your vehicle and we handle the rest. You can go about your day while we make your car shine!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What areas do you service?</h4>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We service the entire Pocono region including Marshalls Creek, Saylorsburg, East Stroudsburg, Stroudsburg, Tannersville, Mount Pocono, and surrounding areas. If you're unsure if we service your area, just give us a call and we'll let you know!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>How long does a detail take?</h4>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            It depends on the service and condition of your vehicle. An Express Wash typically takes 45 minutes to 1 hour. Interior details take 2-3 hours. Complete details can take 3-5 hours. Ceramic coatings require a full day. We'll give you an accurate time estimate when you book.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What payment methods do you accept?</h4>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We accept cash, all major credit cards, Venmo, and Zelle. Payment is due upon completion of service. For larger jobs like ceramic coatings, we may require a deposit to secure your appointment.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>How often should I detail my vehicle?</h4>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            For best results, we recommend an Express Wash every 2-4 weeks, an Interior Detail every 3-4 months, and a Complete Detail twice a year (spring and fall). Regular maintenance keeps your vehicle looking great and protects its value. We also offer maintenance packages for regular customers!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What if it rains on my appointment day?</h4>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We monitor the weather closely. If rain is expected, we'll contact you to reschedule at no charge. For covered locations like garages or carports, we can often still work in light rain. Your satisfaction and the quality of our work always comes first!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Get In Touch</span>
+                <h2 class="section-title">Contact Us for a Free Quote</h2>
+                <p>Ready to get your vehicle looking its best? Contact us today!</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>Let's Connect</h3>
+                    <p>We service the entire Pocono region. Give us a call or fill out the form to schedule your appointment. We'll come to you!</p>
+                    
+                    <ul class="contact-details">
+                        <li>
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <h4>Service Area</h4>
+                                <span>Marshalls Creek, PA & Pocono Region</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <a href="tel:+15705551234">(570) 555-1234</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <a href="mailto:info@jerseyjoedetailing.com">info@jerseyjoedetailing.com</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">🕐</div>
+                            <div class="contact-text">
+                                <h4>Hours</h4>
+                                <span>Monday - Saturday: 8AM - 6PM</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100071537169288" target="_blank" title="Facebook">📘</a>
+                        <a href="#" title="Instagram">📸</a>
+                        <a href="tel:+15705551234" title="Call">📞</a>
+                    </div>
+                </div>
+
+                <form class="contact-form fade-in" onsubmit="handleContactForm(event)">
+                    <h3>Send Us a Message</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Your Name *</label>
+                            <input type="text" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" placeholder="(570) 555-0000" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="you@email.com">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vehicle Type</label>
+                            <select>
+                                <option>Select vehicle type</option>
+                                <option>Sedan / Coupe</option>
+                                <option>SUV / Crossover</option>
+                                <option>Truck</option>
+                                <option>Van / Minivan</option>
+                                <option>Sports Car</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Needed</label>
+                            <select>
+                                <option>Select service</option>
+                                <option>Express Wash</option>
+                                <option>Interior Detail</option>
+                                <option>Complete Detail</option>
+                                <option>Ceramic Coating</option>
+                                <option>Custom Quote</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="Tell us about your vehicle and what you're looking for..."></textarea>
+                    </div>
+                    <button type="submit" class="contact-form-btn">Send Message →</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Area -->
+    <section class="location">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Service Area</span>
+                <h2 class="section-title">We Come To You</h2>
+                <p>Serving the entire Pocono region with pride</p>
+            </div>
+
+            <div class="location-card fade-in">
+                <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80')"></div>
+                <div class="location-content">
+                    <h3>Pocono Region, Pennsylvania</h3>
+                    <ul class="location-details">
+                        <li><span>📍</span> Marshalls Creek, Saylorsburg, East Stroudsburg</li>
+                        <li><span>📍</span> Stroudsburg, Tannersville, Mount Pocono</li>
+                        <li><span>🕐</span> Monday - Saturday: 8AM - 6PM</li>
+                        <li><span>📞</span> (570) 555-1234</li>
+                    </ul>
+                    <a href="tel:+15705551234" class="location-btn">📞 Call to Schedule</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <div class="logo-icon">JJ</div>
+                        <div class="logo-text">Jersey <span>Joe</span></div>
+                    </div>
+                    <p>Professional mobile auto detailing serving Marshalls Creek, PA and the entire Pocono region. We bring the car wash to you with over 13 years of experience.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100071537169288" target="_blank">📘</a>
+                        <a href="#">📸</a>
+                        <a href="tel:+15705551234">📞</a>
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-services">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Express Wash</a></li>
+                        <li><a href="#services">Interior Detail</a></li>
+                        <li><a href="#services">Complete Detail</a></li>
+                        <li><a href="#services">Ceramic Coating</a></li>
+                        <li><a href="#services">Wax & Polish</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><span>📍</span> Marshalls Creek, PA</li>
+                        <li><span>📞</span> (570) 555-1234</li>
+                        <li><span>✉️</span> info@jerseyjoedetailing.com</li>
+                        <li><span>🕐</span> Mon-Sat: 8AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Jersey Joe Mobile Detailing. All Rights Reserved. | Serving the Pocono Region with Pride</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Discount Popup -->
+    <div class="popup-overlay" id="discountPopup">
+        <div class="popup">
+            <button class="popup-close" onclick="closePopup()">×</button>
+            <div class="popup-badge">🔥 Limited Time Offer!</div>
+            <h3>First-Time Customer?</h3>
+            <div class="popup-discount">10% OFF</div>
+            <p>Get 10% off your first detail! Just mention this offer when you call.</p>
+            <div class="popup-form">
+                <input type="text" placeholder="Your Name">
+                <input type="tel" placeholder="Phone Number">
+                <button class="popup-btn" onclick="claimOffer()">Claim My Discount</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        setInterval(nextSlide, 6000);
+
+        // Testimonials Slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+
+        function goToTestimonial(index) {
+            testimonials[currentTestimonial].classList.remove('active');
+            testimonialDots[currentTestimonial].classList.remove('active');
+            currentTestimonial = index;
+            testimonials[currentTestimonial].classList.add('active');
+            testimonialDots[currentTestimonial].classList.add('active');
+        }
+
+        function nextTestimonial() {
+            goToTestimonial((currentTestimonial + 1) % testimonials.length);
+        }
+
+        setInterval(nextTestimonial, 5000);
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
+
+        // Form Handlers
+        function handleQuoteForm(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! Joe will contact you shortly with your free quote.');
+        }
+
+        function handleContactForm(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+        }
+
+        // Popup
+        function showPopup() {
+            document.getElementById('discountPopup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('discountPopup').classList.remove('active');
+        }
+
+        function claimOffer() {
+            alert('Your 10% discount has been reserved! We will call you shortly to schedule your appointment.');
+            closePopup();
+        }
+
+        // Show popup after 5 seconds (can be disabled)
+        // setTimeout(showPopup, 5000);
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            alert('Mobile menu - implement slide-out navigation');
+        }
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Service tabs (placeholder for future boat/yacht services)
+        function switchServiceTab(tab) {
+            // Currently only cars tab, but ready for expansion
+        }
+    </script>
+</body>
+</html>
