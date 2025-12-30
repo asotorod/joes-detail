@@ -1,0 +1,20 @@
+{
+  "name": "jersey-joe-mobile-detailing",
+  "version": "2.0.0",
+  "description": "Professional Mobile Auto Detailing - Marshalls Creek, PA",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "auto detailing",
+    "mobile detailing",
+    "car wash",
+    "marshalls creek",
+    "pennsylvania",
+    "poconos"
+  ],
+  "author": "Jersey Joe Mobile Detailing",
+  "license": "MIT"
+}
