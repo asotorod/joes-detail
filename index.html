@@ -186,12 +186,14 @@
             width: 100%;
         }
 
+        /* Mobile Menu Toggle */
         .mobile-toggle {
             display: none;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
             padding: 10px;
+            z-index: 1002;
         }
 
         .mobile-toggle span {
@@ -200,6 +202,138 @@
             background: var(--secondary);
             border-radius: 2px;
             transition: all 0.3s ease;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Mobile Slide Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1001;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 20px;
+            background: var(--secondary);
+            color: white;
+        }
+
+        .mobile-menu-header h3 {
+            font-size: 18px;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .mobile-menu-links li {
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .mobile-menu-links a {
+            display: block;
+            padding: 18px 25px;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .mobile-menu-links a:hover {
+            background: var(--gray-light);
+            color: var(--primary);
+        }
+
+        .mobile-menu-contact {
+            padding: 20px 25px;
+            background: var(--gray-light);
+        }
+
+        .mobile-menu-contact a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .mobile-menu-cta {
+            padding: 20px 25px;
+        }
+
+        .mobile-menu-cta a {
+            display: block;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Sticky Mobile Call Button */
+        .mobile-sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--accent);
+            padding: 0;
+            z-index: 998;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-sticky-cta a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 18px;
+            width: 100%;
         }
 
         /* Hero Slider */
@@ -352,10 +486,11 @@
             padding: 14px 18px;
             border: 2px solid #e9ecef;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 16px;
             font-family: 'Open Sans', sans-serif;
             transition: all 0.3s ease;
             background: #f8f9fa;
+            -webkit-appearance: none;
         }
 
         .quote-form select:focus,
@@ -540,6 +675,7 @@
             border-radius: 50%;
             font-size: 12px;
             font-weight: 700;
+            flex-shrink: 0;
         }
 
         /* Why Choose Us */
@@ -686,7 +822,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
@@ -740,6 +876,7 @@
             background: var(--gray-light);
             padding: 10px 20px;
             border-radius: 10px;
+            flex: 1;
         }
 
         .service-price-label {
@@ -784,20 +921,6 @@
             content: '✓';
             color: var(--primary);
             font-weight: 700;
-        }
-
-        .service-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 14px;
-            margin-top: 15px;
-        }
-
-        .service-link:hover {
-            color: var(--accent);
         }
 
         /* Testimonials */
@@ -981,6 +1104,7 @@
             align-items: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            gap: 15px;
         }
 
         .faq-question:hover {
@@ -991,11 +1115,13 @@
             color: var(--secondary);
             font-size: 16px;
             font-weight: 600;
+            flex: 1;
         }
 
         .faq-icon {
             width: 30px;
             height: 30px;
+            min-width: 30px;
             background: var(--primary);
             color: white;
             border-radius: 50%;
@@ -1127,10 +1253,11 @@
             padding: 14px 18px;
             border: 2px solid #e9ecef;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 16px;
             font-family: 'Open Sans', sans-serif;
             transition: all 0.3s ease;
             background: white;
+            -webkit-appearance: none;
         }
 
         .contact-form input:focus,
@@ -1351,6 +1478,7 @@
             z-index: 9999;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .popup-overlay.active {
@@ -1362,7 +1490,7 @@
             border-radius: 20px;
             padding: 40px;
             max-width: 450px;
-            width: 90%;
+            width: 100%;
             text-align: center;
             position: relative;
             animation: popupIn 0.4s ease;
@@ -1435,7 +1563,7 @@
             padding: 14px 18px;
             border: 2px solid #e9ecef;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 16px;
             margin-bottom: 15px;
             font-family: 'Open Sans', sans-serif;
         }
@@ -1453,7 +1581,11 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* Responsive */
+        /* ============================================
+           RESPONSIVE STYLES - COMPREHENSIVE MOBILE
+           ============================================ */
+
+        /* Tablet - 1024px */
         @media (max-width: 1024px) {
             .hero-grid {
                 grid-template-columns: 1fr;
@@ -1465,6 +1597,10 @@
                 margin: 0 auto;
             }
 
+            .hero-services {
+                justify-content: center;
+            }
+
             .about-grid {
                 grid-template-columns: 1fr;
             }
@@ -1474,11 +1610,8 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .top-bar {
-                display: none;
-            }
-
+        /* Tablet Small - 900px */
+        @media (max-width: 900px) {
             .nav-links {
                 display: none;
             }
@@ -1486,34 +1619,331 @@
             .mobile-toggle {
                 display: flex;
             }
+        }
+
+        /* Mobile - 768px */
+        @media (max-width: 768px) {
+            .top-bar {
+                display: none;
+            }
+
+            .mobile-sticky-cta {
+                display: block;
+            }
+
+            body {
+                padding-bottom: 60px;
+            }
+
+            .navbar {
+                padding: 12px 0;
+            }
+
+            .logo-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
 
             .hero {
                 height: auto;
-                padding: 100px 0 60px;
+                min-height: 100vh;
+                padding: 30px 0 60px;
+            }
+
+            .hero-grid {
+                gap: 30px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+                letter-spacing: 2px;
             }
 
             .hero-title {
-                font-size: 36px;
+                font-size: 28px;
+            }
+
+            .hero-service-tag {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .hero-cta {
+                padding: 14px 28px;
+                font-size: 13px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .quote-form-card {
+                padding: 25px 20px;
+                max-width: 100%;
+            }
+
+            .quote-form-title h3 {
+                font-size: 20px;
+            }
+
+            .quote-form select,
+            .quote-form input {
+                padding: 12px 15px;
+            }
+
+            .slider-nav {
+                bottom: 15px;
+            }
+
+            .about,
+            .services,
+            .testimonials,
+            .faq,
+            .contact,
+            .location {
+                padding: 60px 0;
+            }
+
+            .why-us {
+                padding: 50px 0;
+            }
+
+            .section-label {
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+
+            .section-header {
+                margin-bottom: 30px;
+            }
+
+            .section-header p {
+                font-size: 14px;
+            }
+
+            .about-badge {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 20px;
+                display: inline-block;
+            }
+
+            .about-image {
+                text-align: center;
+            }
+
+            .about-badge-number {
+                font-size: 32px;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .about-feature {
+                font-size: 14px;
+            }
+
+            .stats {
+                padding: 40px 0;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 25px 15px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+                letter-spacing: 1px;
             }
 
             .why-us-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .why-us-card {
+                padding: 30px 25px;
+            }
+
+            .why-us-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+
+            .why-us-card h3 {
+                font-size: 18px;
+            }
+
+            .why-us-card p {
+                font-size: 14px;
+            }
+
+            .service-tabs {
+                margin-bottom: 25px;
+            }
+
+            .service-tab {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .service-notice {
+                padding: 12px 15px;
+                font-size: 13px;
+                margin-bottom: 25px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .service-image {
+                height: 180px;
+            }
+
+            .service-content {
+                padding: 20px;
+            }
+
+            .service-prices {
+                gap: 10px;
+            }
+
+            .service-price {
+                padding: 8px 15px;
+            }
+
+            .service-price-amount {
+                font-size: 20px;
+            }
+
+            .service-card h3 {
+                font-size: 17px;
+            }
+
+            .testimonial-slide {
+                padding: 20px 10px;
+            }
+
+            .testimonial-quote {
+                font-size: 16px;
+                line-height: 1.7;
+            }
+
+            .testimonial-quote::before {
+                font-size: 50px;
+                top: -20px;
+            }
+
+            .testimonial-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+
+            .testimonial-info h4 {
+                font-size: 16px;
+            }
+
+            .cta {
+                padding: 50px 0;
+            }
+
+            .cta h2 {
+                font-size: 24px;
+            }
+
+            .cta p {
+                font-size: 15px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cta-btn {
+                width: 100%;
+                padding: 16px 30px;
+            }
+
+            .faq-question {
+                padding: 18px 20px;
+            }
+
+            .faq-question h4 {
+                font-size: 14px;
+            }
+
+            .faq-answer-content {
+                padding: 0 20px 20px;
+                font-size: 14px;
             }
 
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-info h3 {
+                font-size: 22px;
+            }
+
+            .contact-icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .contact-form {
+                padding: 25px 20px;
+            }
+
+            .contact-form h3 {
+                font-size: 20px;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
             }
 
+            .location-image {
+                height: 180px;
+            }
+
+            .location-content {
+                padding: 25px 20px;
+            }
+
+            .location-content h3 {
+                font-size: 20px;
+            }
+
+            .footer {
+                padding: 50px 0 100px;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
                 text-align: center;
             }
 
@@ -1522,8 +1952,75 @@
                 transform: translateX(-50%);
             }
 
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                font-size: 12px;
+            }
+
+            .popup {
+                padding: 30px 20px;
+                border-radius: 15px;
+            }
+
+            .popup h3 {
+                font-size: 22px;
+            }
+
+            .popup-discount {
+                font-size: 48px;
+            }
+        }
+
+        /* Small Mobile - 480px */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+
+            .hero-subtitle {
+                font-size: 11px;
+            }
+
+            .hero-service-tag {
+                padding: 5px 10px;
+                font-size: 10px;
+            }
+
             .section-title {
-                font-size: 32px;
+                font-size: 22px;
+            }
+
+            .stat-number {
+                font-size: 30px;
+            }
+
+            .service-prices {
+                flex-direction: column;
+            }
+
+            .service-price {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 12px 15px;
+            }
+
+            .cta h2 {
+                font-size: 20px;
+            }
+
+            .location-details li {
+                font-size: 14px;
+            }
+
+            .popup-discount {
+                font-size: 40px;
             }
         }
 
@@ -1537,6 +2034,11 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Prevent body scroll when mobile menu is open */
+        body.menu-open {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -1572,7 +2074,7 @@
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
-                <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <div class="mobile-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -1581,10 +2083,39 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Slide Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <h3>Jersey Joe Detailing</h3>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMobileMenu()">About Us</a></li>
+            <li><a href="#services" onclick="closeMobileMenu()">Services & Prices</a></li>
+            <li><a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a></li>
+            <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="#faq" onclick="closeMobileMenu()">FAQ</a></li>
+        </ul>
+        <div class="mobile-menu-contact">
+            <a href="tel:+15705551234">📞 (570) 555-1234</a>
+            <a href="mailto:info@jerseyjoedetailing.com">✉️ info@jerseyjoedetailing.com</a>
+        </div>
+        <div class="mobile-menu-cta">
+            <a href="#contact" onclick="closeMobileMenu()">Get a Free Quote</a>
+        </div>
+    </div>
+
+    <!-- Mobile Sticky Call Button -->
+    <div class="mobile-sticky-cta">
+        <a href="tel:+15705551234">📞 Call Now - (570) 555-1234</a>
+    </div>
+
     <!-- Hero Slider -->
     <section class="hero" id="home">
         <div class="hero-slider">
-            <!-- Slide 1 -->
             <div class="hero-slide active">
                 <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=1920&q=80')"></div>
                 <div class="hero-content container">
@@ -1607,25 +2138,10 @@
                             </div>
                             <form class="quote-form" onsubmit="handleQuoteForm(event)">
                                 <div class="form-group">
-                                    <select>
-                                        <option>Select Vehicle Type</option>
-                                        <option>Sedan / Coupe</option>
-                                        <option>SUV / Crossover</option>
-                                        <option>Truck</option>
-                                        <option>Van / Minivan</option>
-                                        <option>Sports Car</option>
-                                        <option>Other</option>
-                                    </select>
+                                    <select><option>Select Vehicle Type</option><option>Sedan / Coupe</option><option>SUV / Crossover</option><option>Truck</option><option>Van / Minivan</option><option>Sports Car</option><option>Other</option></select>
                                 </div>
                                 <div class="form-group">
-                                    <select>
-                                        <option>Select Service Package</option>
-                                        <option>Express Wash - Starting $75</option>
-                                        <option>Interior Detail - Starting $125</option>
-                                        <option>Complete Detail - Starting $175</option>
-                                        <option>Ceramic Coating - Starting $300</option>
-                                        <option>Custom Service</option>
-                                    </select>
+                                    <select><option>Select Service Package</option><option>Express Wash - Starting $75</option><option>Interior Detail - Starting $125</option><option>Complete Detail - Starting $175</option><option>Ceramic Coating - Starting $300</option><option>Custom Service</option></select>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="Your Name">
@@ -1644,7 +2160,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Slide 2 -->
             <div class="hero-slide">
                 <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1920&q=80')"></div>
                 <div class="hero-content container">
@@ -1666,25 +2181,10 @@
                             </div>
                             <form class="quote-form" onsubmit="handleQuoteForm(event)">
                                 <div class="form-group">
-                                    <select>
-                                        <option>Select Vehicle Type</option>
-                                        <option>Sedan / Coupe</option>
-                                        <option>SUV / Crossover</option>
-                                        <option>Truck</option>
-                                        <option>Van / Minivan</option>
-                                        <option>Sports Car</option>
-                                        <option>Other</option>
-                                    </select>
+                                    <select><option>Select Vehicle Type</option><option>Sedan / Coupe</option><option>SUV / Crossover</option><option>Truck</option><option>Van / Minivan</option><option>Sports Car</option><option>Other</option></select>
                                 </div>
                                 <div class="form-group">
-                                    <select>
-                                        <option>Select Service Package</option>
-                                        <option>Express Wash - Starting $75</option>
-                                        <option>Interior Detail - Starting $125</option>
-                                        <option>Complete Detail - Starting $175</option>
-                                        <option>Ceramic Coating - Starting $300</option>
-                                        <option>Custom Service</option>
-                                    </select>
+                                    <select><option>Select Service Package</option><option>Express Wash - Starting $75</option><option>Interior Detail - Starting $125</option><option>Complete Detail - Starting $175</option><option>Ceramic Coating - Starting $300</option><option>Custom Service</option></select>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="Your Name">
@@ -1748,7 +2248,7 @@
                     <p>We come directly to your home, office, or any location that's convenient for you. No need to waste time at a car wash!</p>
                 </div>
                 <div class="why-us-card fade-in">
-                    <div class="why-us-icon">🌼</div>
+                    <div class="why-us-icon">🌟</div>
                     <h3>Premium Products</h3>
                     <p>We use only professional-grade detailing products and proven techniques to ensure the best results every time.</p>
                 </div>
@@ -1765,22 +2265,10 @@
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Mobile Service</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5000+</div>
-                    <div class="stat-label">Vehicles Detailed</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">13+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5☆</div>
-                    <div class="stat-label">Customer Rating</div>
-                </div>
+                <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Mobile Service</div></div>
+                <div class="stat-item"><div class="stat-number">5000+</div><div class="stat-label">Vehicles Detailed</div></div>
+                <div class="stat-item"><div class="stat-number">13+</div><div class="stat-label">Years Experience</div></div>
+                <div class="stat-item"><div class="stat-number">5★</div><div class="stat-label">Customer Rating</div></div>
             </div>
         </div>
     </section>
@@ -1793,171 +2281,61 @@
                 <h2 class="section-title">Our Services & Prices</h2>
                 <p>Vehicles are categorized by size and difficulty in detailing. All services performed at your location!</p>
             </div>
-
-            <div class="service-tabs">
-                <button class="service-tab active" onclick="switchServiceTab('cars')">Cars / SUVs / Trucks</button>
-            </div>
-
-            <div class="service-notice">
-                <strong>📍 Mobile Services:</strong> All prices include travel to your location in the Pocono region. Additional charges may apply for locations outside our standard service area.
-            </div>
-
+            <div class="service-tabs"><button class="service-tab active">Cars / SUVs / Trucks</button></div>
+            <div class="service-notice"><strong>📍 Mobile Services:</strong> All prices include travel to your location in the Pocono region. Additional charges may apply for locations outside our standard service area.</div>
             <div class="services-grid" id="cars-services">
                 <div class="service-card fade-in">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&q=80')">
-                        <div class="service-price-badge">From $75</div>
-                    </div>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&q=80')"><div class="service-price-badge">From $75</div></div>
                     <div class="service-content">
-                        <div class="service-prices">
-                            <div class="service-price">
-                                <span class="service-price-label">Car</span>
-                                <span class="service-price-amount">$75</span>
-                            </div>
-                            <div class="service-price">
-                                <span class="service-price-label">SUV/Truck</span>
-                                <span class="service-price-amount">$95</span>
-                            </div>
-                        </div>
+                        <div class="service-prices"><div class="service-price"><span class="service-price-label">Car</span><span class="service-price-amount">$75</span></div><div class="service-price"><span class="service-price-label">SUV/Truck</span><span class="service-price-amount">$95</span></div></div>
                         <h3>Express Wash Package</h3>
                         <p>Quick but thorough exterior hand wash with professional-grade products. Perfect for regular maintenance.</p>
-                        <ul class="service-features">
-                            <li>Full Exterior Hand Wash</li>
-                            <li>Wheel & Tire Cleaning</li>
-                            <li>Windows Inside & Out</li>
-                            <li>Quick Interior Vacuum</li>
-                            <li>Dashboard Wipe Down</li>
-                        </ul>
+                        <ul class="service-features"><li>Full Exterior Hand Wash</li><li>Wheel & Tire Cleaning</li><li>Windows Inside & Out</li><li>Quick Interior Vacuum</li><li>Dashboard Wipe Down</li></ul>
                     </div>
                 </div>
-
                 <div class="service-card fade-in">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80')">
-                        <div class="service-price-badge">Most Popular</div>
-                    </div>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80')"><div class="service-price-badge">Most Popular</div></div>
                     <div class="service-content">
-                        <div class="service-prices">
-                            <div class="service-price">
-                                <span class="service-price-label">Car</span>
-                                <span class="service-price-amount">$175</span>
-                            </div>
-                            <div class="service-price">
-                                <span class="service-price-label">SUV/Truck</span>
-                                <span class="service-price-amount">$225</span>
-                            </div>
-                        </div>
+                        <div class="service-prices"><div class="service-price"><span class="service-price-label">Car</span><span class="service-price-amount">$175</span></div><div class="service-price"><span class="service-price-label">SUV/Truck</span><span class="service-price-amount">$225</span></div></div>
                         <h3>Complete Detail Package</h3>
                         <p>The ultimate package for your vehicle. Comprehensive interior and exterior detail to make your car shine like new.</p>
-                        <ul class="service-features">
-                            <li>Everything in Express Wash</li>
-                            <li>Full Interior Deep Clean</li>
-                            <li>Leather Conditioning</li>
-                            <li>Hand Wax & Polish</li>
-                            <li>Engine Bay Cleaning</li>
-                        </ul>
+                        <ul class="service-features"><li>Everything in Express Wash</li><li>Full Interior Deep Clean</li><li>Leather Conditioning</li><li>Hand Wax & Polish</li><li>Engine Bay Cleaning</li></ul>
                     </div>
                 </div>
-
                 <div class="service-card fade-in">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80')">
-                        <div class="service-price-badge">From $125</div>
-                    </div>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80')"><div class="service-price-badge">From $125</div></div>
                     <div class="service-content">
-                        <div class="service-prices">
-                            <div class="service-price">
-                                <span class="service-price-label">Car</span>
-                                <span class="service-price-amount">$125</span>
-                            </div>
-                            <div class="service-price">
-                                <span class="service-price-label">SUV/Truck</span>
-                                <span class="service-price-amount">$150</span>
-                            </div>
-                        </div>
+                        <div class="service-prices"><div class="service-price"><span class="service-price-label">Car</span><span class="service-price-amount">$125</span></div><div class="service-price"><span class="service-price-label">SUV/Truck</span><span class="service-price-amount">$150</span></div></div>
                         <h3>Interior Detail Package</h3>
                         <p>Deep cleaning of all interior surfaces. Steam cleaning, shampooing, and complete sanitization.</p>
-                        <ul class="service-features">
-                            <li>Complete Vacuum & Steam Clean</li>
-                            <li>Carpet & Seat Shampoo</li>
-                            <li>Dashboard & Trim Detail</li>
-                            <li>Cup Holders & Vents</li>
-                            <li>Odor Elimination</li>
-                        </ul>
+                        <ul class="service-features"><li>Complete Vacuum & Steam Clean</li><li>Carpet & Seat Shampoo</li><li>Dashboard & Trim Detail</li><li>Cup Holders & Vents</li><li>Odor Elimination</li></ul>
                     </div>
                 </div>
-
                 <div class="service-card fade-in">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80')">
-                        <div class="service-price-badge">From $100</div>
-                    </div>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80')"><div class="service-price-badge">From $100</div></div>
                     <div class="service-content">
-                        <div class="service-prices">
-                            <div class="service-price">
-                                <span class="service-price-label">Car</span>
-                                <span class="service-price-amount">$100</span>
-                            </div>
-                            <div class="service-price">
-                                <span class="service-price-label">SUV/Truck</span>
-                                <span class="service-price-amount">$125</span>
-                            </div>
-                        </div>
+                        <div class="service-prices"><div class="service-price"><span class="service-price-label">Car</span><span class="service-price-amount">$100</span></div><div class="service-price"><span class="service-price-label">SUV/Truck</span><span class="service-price-amount">$125</span></div></div>
                         <h3>Wax & Polish Package</h3>
                         <p>Professional hand wax application to protect and enhance your vehicle's paint finish.</p>
-                        <ul class="service-features">
-                            <li>Includes Express Wash</li>
-                            <li>Clay Bar Treatment</li>
-                            <li>Hand Polish</li>
-                            <li>Premium Wax Application</li>
-                            <li>Tire Shine</li>
-                        </ul>
+                        <ul class="service-features"><li>Includes Express Wash</li><li>Clay Bar Treatment</li><li>Hand Polish</li><li>Premium Wax Application</li><li>Tire Shine</li></ul>
                     </div>
                 </div>
-
                 <div class="service-card fade-in">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80')">
-                        <div class="service-price-badge">Premium</div>
-                    </div>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80')"><div class="service-price-badge">Premium</div></div>
                     <div class="service-content">
-                        <div class="service-prices">
-                            <div class="service-price">
-                                <span class="service-price-label">Car</span>
-                                <span class="service-price-amount">$300</span>
-                            </div>
-                            <div class="service-price">
-                                <span class="service-price-label">SUV/Truck</span>
-                                <span class="service-price-amount">$400</span>
-                            </div>
-                        </div>
+                        <div class="service-prices"><div class="service-price"><span class="service-price-label">Car</span><span class="service-price-amount">$300</span></div><div class="service-price"><span class="service-price-label">SUV/Truck</span><span class="service-price-amount">$400</span></div></div>
                         <h3>Ceramic Coating</h3>
                         <p>Long-lasting paint protection that keeps your vehicle looking showroom fresh for years.</p>
-                        <ul class="service-features">
-                            <li>Paint Decontamination</li>
-                            <li>Clay Bar Treatment</li>
-                            <li>Paint Correction</li>
-                            <li>Ceramic Coating Application</li>
-                            <li>2+ Year Protection</li>
-                        </ul>
+                        <ul class="service-features"><li>Paint Decontamination</li><li>Clay Bar Treatment</li><li>Paint Correction</li><li>Ceramic Coating Application</li><li>2+ Year Protection</li></ul>
                     </div>
                 </div>
-
                 <div class="service-card fade-in">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&q=80')">
-                        <div class="service-price-badge">Add-On</div>
-                    </div>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&q=80')"><div class="service-price-badge">Add-On</div></div>
                     <div class="service-content">
-                        <div class="service-prices">
-                            <div class="service-price">
-                                <span class="service-price-label">Starting</span>
-                                <span class="service-price-amount">$75</span>
-                            </div>
-                        </div>
+                        <div class="service-prices"><div class="service-price"><span class="service-price-label">Starting</span><span class="service-price-amount">$75</span></div></div>
                         <h3>Additional Services</h3>
                         <p>Extra services to complement your detail package.</p>
-                        <ul class="service-features">
-                            <li>Headlight Restoration - $75</li>
-                            <li>Engine Detail - $50</li>
-                            <li>Pet Hair Removal - $50</li>
-                            <li>Scratch Removal - Quote</li>
-                            <li>Paint Touch-Up - Quote</li>
-                        </ul>
+                        <ul class="service-features"><li>Headlight Restoration - $75</li><li>Engine Detail - $50</li><li>Pet Hair Removal - $50</li><li>Scratch Removal - Quote</li><li>Paint Touch-Up - Quote</li></ul>
                     </div>
                 </div>
             </div>
@@ -1972,44 +2350,22 @@
                 <h2 class="section-title">What People Are Saying</h2>
                 <p>Don't just take our word for it — hear from our satisfied customers in the Pocono region!</p>
             </div>
-
             <div class="testimonials-slider">
                 <div class="testimonial-slide active">
-                    <div class="testimonial-stars">☆☆☆☆☆</div>
+                    <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-quote">Joe did an incredible job on my truck! It looks better than when I bought it. The attention to detail is amazing and he's so professional. The convenience of having him come to my house is unbeatable. Highly recommend to everyone!</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">M</div>
-                        <div class="testimonial-info">
-                            <h4>Mike R.</h4>
-                            <span>Saylorsburg, PA</span>
-                        </div>
-                    </div>
+                    <div class="testimonial-author"><div class="testimonial-avatar">M</div><div class="testimonial-info"><h4>Mike R.</h4><span>Saylorsburg, PA</span></div></div>
                 </div>
-
                 <div class="testimonial-slide">
-                    <div class="testimonial-stars">☆☆☆☆☆</div>
+                    <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-quote">Best mobile detailing service in the Poconos! My car had never been so clean. Joe really takes pride in his work and it shows. Will definitely be using his services again. Worth every penny!</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">S</div>
-                        <div class="testimonial-info">
-                            <h4>Sarah T.</h4>
-                            <span>Marshalls Creek, PA</span>
-                        </div>
-                    </div>
+                    <div class="testimonial-author"><div class="testimonial-avatar">S</div><div class="testimonial-info"><h4>Sarah T.</h4><span>Marshalls Creek, PA</span></div></div>
                 </div>
-
                 <div class="testimonial-slide">
-                    <div class="testimonial-stars">☆☆☆☆☆</div>
+                    <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-quote">Professional service from start to finish. My SUV interior was a mess with kids' stuff everywhere — now it's spotless! Joe was on time, friendly, and did exactly what he promised. Great job!</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">D</div>
-                        <div class="testimonial-info">
-                            <h4>Dave K.</h4>
-                            <span>East Stroudsburg, PA</span>
-                        </div>
-                    </div>
+                    <div class="testimonial-author"><div class="testimonial-avatar">D</div><div class="testimonial-info"><h4>Dave K.</h4><span>East Stroudsburg, PA</span></div></div>
                 </div>
-
                 <div class="testimonial-nav">
                     <div class="testimonial-dot active" onclick="goToTestimonial(0)"></div>
                     <div class="testimonial-dot" onclick="goToTestimonial(1)"></div>
@@ -2038,79 +2394,13 @@
                 <span class="section-label">Have Questions?</span>
                 <h2 class="section-title">Frequently Asked Questions</h2>
             </div>
-
             <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>How does mobile detailing work?</h4>
-                        <div class="faq-icon">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            It's simple! You book an appointment, and we come to your location — whether it's your home, office, or anywhere else convenient for you. We bring all our own equipment, water, and supplies. All we need is access to your vehicle and we handle the rest. You can go about your day while we make your car shine!
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>What areas do you service?</h4>
-                        <div class="faq-icon">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We service the entire Pocono region including Marshalls Creek, Saylorsburg, East Stroudsburg, Stroudsburg, Tannersville, Mount Pocono, and surrounding areas. If you're unsure if we service your area, just give us a call and we'll let you know!
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>How long does a detail take?</h4>
-                        <div class="faq-icon">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            It depends on the service and condition of your vehicle. An Express Wash typically takes 45 minutes to 1 hour. Interior details take 2-3 hours. Complete details can take 3-5 hours. Ceramic coatings require a full day. We'll give you an accurate time estimate when you book.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>What payment methods do you accept?</h4>
-                        <div class="faq-icon">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We accept cash, all major credit cards, Venmo, and Zelle. Payment is due upon completion of service. For larger jobs like ceramic coatings, we may require a deposit to secure your appointment.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>How often should I detail my vehicle?</h4>
-                        <div class="faq-icon">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            For best results, we recommend an Express Wash every 2-4 weeks, an Interior Detail every 3-4 months, and a Complete Detail twice a year (spring and fall). Regular maintenance keeps your vehicle looking great and protects its value. We also offer maintenance packages for regular customers!
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>What if it rains on my appointment day?</h4>
-                        <div class="faq-icon">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We monitor the weather closely. If rain is expected, we'll contact you to reschedule at no charge. For covered locations like garages or carports, we can often still work in light rain. Your satisfaction and the quality of our work always comes first!
-                        </div>
-                    </div>
-                </div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>How does mobile detailing work?</h4><div class="faq-icon">+</div></div><div class="faq-answer"><div class="faq-answer-content">It's simple! You book an appointment, and we come to your location — whether it's your home, office, or anywhere else convenient for you. We bring all our own equipment, water, and supplies. All we need is access to your vehicle and we handle the rest. You can go about your day while we make your car shine!</div></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>What areas do you service?</h4><div class="faq-icon">+</div></div><div class="faq-answer"><div class="faq-answer-content">We service the entire Pocono region including Marshalls Creek, Saylorsburg, East Stroudsburg, Stroudsburg, Tannersville, Mount Pocono, and surrounding areas. If you're unsure if we service your area, just give us a call and we'll let you know!</div></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>How long does a detail take?</h4><div class="faq-icon">+</div></div><div class="faq-answer"><div class="faq-answer-content">It depends on the service and condition of your vehicle. An Express Wash typically takes 45 minutes to 1 hour. Interior details take 2-3 hours. Complete details can take 3-5 hours. Ceramic coatings require a full day. We'll give you an accurate time estimate when you book.</div></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>What payment methods do you accept?</h4><div class="faq-icon">+</div></div><div class="faq-answer"><div class="faq-answer-content">We accept cash, all major credit cards, Venmo, and Zelle. Payment is due upon completion of service. For larger jobs like ceramic coatings, we may require a deposit to secure your appointment.</div></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>How often should I detail my vehicle?</h4><div class="faq-icon">+</div></div><div class="faq-answer"><div class="faq-answer-content">For best results, we recommend an Express Wash every 2-4 weeks, an Interior Detail every 3-4 months, and a Complete Detail twice a year (spring and fall). Regular maintenance keeps your vehicle looking great and protects its value. We also offer maintenance packages for regular customers!</div></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h4>What if it rains on my appointment day?</h4><div class="faq-icon">+</div></div><div class="faq-answer"><div class="faq-answer-content">We monitor the weather closely. If rain is expected, we'll contact you to reschedule at no charge. For covered locations like garages or carports, we can often still work in light rain. Your satisfaction and the quality of our work always comes first!</div></div></div>
             </div>
         </div>
     </section>
@@ -2123,95 +2413,34 @@
                 <h2 class="section-title">Contact Us for a Free Quote</h2>
                 <p>Ready to get your vehicle looking its best? Contact us today!</p>
             </div>
-
             <div class="contact-grid">
                 <div class="contact-info fade-in">
                     <h3>Let's Connect</h3>
                     <p>We service the entire Pocono region. Give us a call or fill out the form to schedule your appointment. We'll come to you!</p>
-                    
                     <ul class="contact-details">
-                        <li>
-                            <div class="contact-icon">📍</div>
-                            <div class="contact-text">
-                                <h4>Service Area</h4>
-                                <span>Marshalls Creek, PA & Pocono Region</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">📞</div>
-                            <div class="contact-text">
-                                <h4>Phone</h4>
-                                <a href="tel:+15705551234">(570) 555-1234</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">✉️</div>
-                            <div class="contact-text">
-                                <h4>Email</h4>
-                                <a href="mailto:info@jerseyjoedetailing.com">info@jerseyjoedetailing.com</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="contact-icon">🕐</div>
-                            <div class="contact-text">
-                                <h4>Hours</h4>
-                                <span>Monday - Saturday: 8AM - 6PM</span>
-                            </div>
-                        </li>
+                        <li><div class="contact-icon">📍</div><div class="contact-text"><h4>Service Area</h4><span>Marshalls Creek, PA & Pocono Region</span></div></li>
+                        <li><div class="contact-icon">📞</div><div class="contact-text"><h4>Phone</h4><a href="tel:+15705551234">(570) 555-1234</a></div></li>
+                        <li><div class="contact-icon">✉️</div><div class="contact-text"><h4>Email</h4><a href="mailto:info@jerseyjoedetailing.com">info@jerseyjoedetailing.com</a></div></li>
+                        <li><div class="contact-icon">🕐</div><div class="contact-text"><h4>Hours</h4><span>Monday - Saturday: 8AM - 6PM</span></div></li>
                     </ul>
-
                     <div class="social-links">
                         <a href="https://www.facebook.com/profile.php?id=100071537169288" target="_blank" title="Facebook">📘</a>
                         <a href="#" title="Instagram">📸</a>
                         <a href="tel:+15705551234" title="Call">📞</a>
                     </div>
                 </div>
-
                 <form class="contact-form fade-in" onsubmit="handleContactForm(event)">
                     <h3>Send Us a Message</h3>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Your Name *</label>
-                            <input type="text" placeholder="John Smith" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number *</label>
-                            <input type="tel" placeholder="(570) 555-0000" required>
-                        </div>
+                        <div class="form-group"><label>Your Name *</label><input type="text" placeholder="John Smith" required></div>
+                        <div class="form-group"><label>Phone Number *</label><input type="tel" placeholder="(570) 555-0000" required></div>
                     </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" placeholder="you@email.com">
-                    </div>
+                    <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Vehicle Type</label>
-                            <select>
-                                <option>Select vehicle type</option>
-                                <option>Sedan / Coupe</option>
-                                <option>SUV / Crossover</option>
-                                <option>Truck</option>
-                                <option>Van / Minivan</option>
-                                <option>Sports Car</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Service Needed</label>
-                            <select>
-                                <option>Select service</option>
-                                <option>Express Wash</option>
-                                <option>Interior Detail</option>
-                                <option>Complete Detail</option>
-                                <option>Ceramic Coating</option>
-                                <option>Custom Quote</option>
-                            </select>
-                        </div>
+                        <div class="form-group"><label>Vehicle Type</label><select><option>Select vehicle type</option><option>Sedan / Coupe</option><option>SUV / Crossover</option><option>Truck</option><option>Van / Minivan</option><option>Sports Car</option><option>Other</option></select></div>
+                        <div class="form-group"><label>Service Needed</label><select><option>Select service</option><option>Express Wash</option><option>Interior Detail</option><option>Complete Detail</option><option>Ceramic Coating</option><option>Custom Quote</option></select></div>
                     </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea placeholder="Tell us about your vehicle and what you're looking for..."></textarea>
-                    </div>
+                    <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your vehicle and what you're looking for..."></textarea></div>
                     <button type="submit" class="contact-form-btn">Send Message →</button>
                 </form>
             </div>
@@ -2226,7 +2455,6 @@
                 <h2 class="section-title">We Come To You</h2>
                 <p>Serving the entire Pocono region with pride</p>
             </div>
-
             <div class="location-card fade-in">
                 <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80')"></div>
                 <div class="location-content">
@@ -2248,55 +2476,15 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <div class="logo">
-                        <div class="logo-icon">JJ</div>
-                        <div class="logo-text">Jersey <span>Joe</span></div>
-                    </div>
+                    <div class="logo"><div class="logo-icon">JJ</div><div class="logo-text">Jersey <span>Joe</span></div></div>
                     <p>Professional mobile auto detailing serving Marshalls Creek, PA and the entire Pocono region. We bring the car wash to you with over 13 years of experience.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=100071537169288" target="_blank">📘</a>
-                        <a href="#">📸</a>
-                        <a href="tel:+15705551234">📞</a>
-                    </div>
+                    <div class="social-links"><a href="https://www.facebook.com/profile.php?id=100071537169288" target="_blank">📘</a><a href="#">📸</a><a href="tel:+15705551234">📞</a></div>
                 </div>
-
-                <div class="footer-nav">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-services">
-                    <h4>Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="#services">Express Wash</a></li>
-                        <li><a href="#services">Interior Detail</a></li>
-                        <li><a href="#services">Complete Detail</a></li>
-                        <li><a href="#services">Ceramic Coating</a></li>
-                        <li><a href="#services">Wax & Polish</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-contact">
-                    <h4>Contact Us</h4>
-                    <ul class="footer-contact">
-                        <li><span>📍</span> Marshalls Creek, PA</li>
-                        <li><span>📞</span> (570) 555-1234</li>
-                        <li><span>✉️</span> info@jerseyjoedetailing.com</li>
-                        <li><span>🕐</span> Mon-Sat: 8AM-6PM</li>
-                    </ul>
-                </div>
+                <div class="footer-nav"><h4>Quick Links</h4><ul class="footer-links"><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#services">Services</a></li><li><a href="#testimonials">Reviews</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></div>
+                <div class="footer-services"><h4>Services</h4><ul class="footer-links"><li><a href="#services">Express Wash</a></li><li><a href="#services">Interior Detail</a></li><li><a href="#services">Complete Detail</a></li><li><a href="#services">Ceramic Coating</a></li><li><a href="#services">Wax & Polish</a></li></ul></div>
+                <div class="footer-contact"><h4>Contact Us</h4><ul class="footer-contact"><li><span>📍</span> Marshalls Creek, PA</li><li><span>📞</span> (570) 555-1234</li><li><span>✉️</span> info@jerseyjoedetailing.com</li><li><span>🕐</span> Mon-Sat: 8AM-6PM</li></ul></div>
             </div>
-
-            <div class="footer-bottom">
-                <p>© 2024 Jersey Joe Mobile Detailing. All Rights Reserved. | Serving the Pocono Region with Pride</p>
-            </div>
+            <div class="footer-bottom"><p>© 2024 Jersey Joe Mobile Detailing. All Rights Reserved. | Serving the Pocono Region with Pride</p></div>
         </div>
     </footer>
 
@@ -2317,7 +2505,6 @@
     </div>
 
     <script>
-        // Hero Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.slider-dot');
@@ -2336,7 +2523,6 @@
 
         setInterval(nextSlide, 6000);
 
-        // Testimonials Slider
         let currentTestimonial = 0;
         const testimonials = document.querySelectorAll('.testimonial-slide');
         const testimonialDots = document.querySelectorAll('.testimonial-dot');
@@ -2355,13 +2541,11 @@
 
         setInterval(nextTestimonial, 5000);
 
-        // FAQ Toggle
         function toggleFaq(element) {
             const faqItem = element.parentElement;
             faqItem.classList.toggle('active');
         }
 
-        // Form Handlers
         function handleQuoteForm(e) {
             e.preventDefault();
             alert('Thank you for your inquiry! Joe will contact you shortly with your free quote.');
@@ -2372,7 +2556,6 @@
             alert('Thank you for your message! We will get back to you within 24 hours.');
         }
 
-        // Popup
         function showPopup() {
             document.getElementById('discountPopup').classList.add('active');
         }
@@ -2386,15 +2569,28 @@
             closePopup();
         }
 
-        // Show popup after 5 seconds (can be disabled)
-        // setTimeout(showPopup, 5000);
-
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
-            alert('Mobile menu - implement slide-out navigation');
+            const toggle = document.getElementById('mobileToggle');
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            
+            toggle.classList.toggle('active');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         }
 
-        // Fade in on scroll
+        function closeMobileMenu() {
+            const toggle = document.getElementById('mobileToggle');
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            
+            toggle.classList.remove('active');
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -2412,7 +2608,6 @@
             observer.observe(el);
         });
 
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -2425,11 +2620,6 @@
                 }
             });
         });
-
-        // Service tabs (placeholder for future boat/yacht services)
-        function switchServiceTab(tab) {
-            // Currently only cars tab, but ready for expansion
-        }
     </script>
 </body>
 </html>
